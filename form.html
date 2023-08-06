@@ -8,22 +8,47 @@
 </head>
 <body>
     <h1>Contacto</h1>
-    <form onsubmit="return validarForm()">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
-        <br>
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" required>
-        <br>
-        <label for="telefono">Telefono:</label>
-        <input type="tel" id="telefono" name="telefono" required>
-        <br>
-        <label for="mensaje">Mensaje:</label>
-        <textarea name="mensaje" id="mensaje" cols="30" rows="4"></textarea>
-        <br>
-        <input type="submit" value="Enviar">
+    <main>
+        <form class="formulario" id="formulario">
 
-    </form>
+            <!--Grupo: Usuario-->
+            <div class="formulario__grupo" id="grupo__nombre">
+                <label for="nombre" class="formulario__label">Nombre:</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" id="nombre" name="nombre" required>
+                </div>
+                <p class="formulario__input-error" >El nombre no es válido. Por favor, ingrese un nombre válido que contenga solo letras y espacios.</p>
+            </div>
+           
+            <!--Grupo: Email-->
+            <div class="formulario__grupo" id="grupo__email">
+                <label for="email" class="formulario__label">Email:</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" id="email" name="email" required>
+                </div>
+                <p class="formulario__input-error">El correo electrónico no es válido. Por favor, ingrese una dirección de correo válida.</p>
+            </div>
+            
+            <!--Grupo: telefono-->
+            <div class="formulario__grupo" id="grupo__telefono">
+                <label for="telefono" class="formulario__label">Telefono:</label>
+                <div class="formulario__grupo-input">
+                    <input type="tel" class="formulario__input" id="telefono" name="telefono" required>
+                </div>
+                <p class="formulario__input-error">El número de teléfono no es válido. Por favor, ingrese solo números sin espacios ni caracteres especiales.</p>
+            </div>
+            
+            <label for="mensaje" class="formulario__label">Mensaje:</label>
+            <textarea name="mensaje" id="mensaje" cols="30" rows="4" maxlength="200" required></textarea>
+            
+            <div class="formulario__grupo formulario__grupo-btn-enviar">
+				<button type="submit" class="formulario__btn">Enviar</button>
+                <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente!</p>			
+            </div>
+            
+        </form>
+    </main>
+    
     <script src="script.js"></script>
     
 </body>

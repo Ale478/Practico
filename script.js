@@ -1,36 +1,67 @@
+const formulario = document.getElementById('formulario');
+const inputs = document.querySelectorAll('#formulario input');
 
-function validarForm(){ // Retorna True o False
 
-    // Obtener los valores de los campos
-    let nombre = document.getElementById('nombre').value;
-    let email = document.getElementById('email').value;
-    let telefono = document.getElementById('telefono').value;
-
-    // Definimos patrones con expresiones regulares 
-    let nombrePatron = /^[a-zA-Z\s]+$/;
-    let telefonoPatron = /^\d+$/;
-    let emailPatron = /^[^\s@]+@ [^\s@]+\.[^\s@]+$/;
-
-    let enviar = true;
-
-    // Valida el campo nombre
-    if(!nombrePatron.test(nombre)){
-        alert("El nombre no es válido. Por favor, ingrese un nombre válido que contenga solo letras y espacios.");
-        enviar = false;
-    }
-
-    // Valida el campo email
-    if(!emailPatron.test(email)){
-        alert("El correo electrónico no es válido. Por favor, ingrese una dirección de correo válida.");
-        enviar = false;
-    }
-
-    // Valida el campo telefono
-    if(!telefonoPatron.test(telefono)){
-        alert("El número de teléfono no es válido. Por favor, ingrese solo números sin espacios ni caracteres especiales.");
-        enviar = false;
-    }
-    
-    return enviar;
-    
+const expresiones = {
+	nombre: /^[a-zA-Z\s]+$/, // Letras y espacios, pueden llevar acentos.
+	email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+	telefono: /^\d{7,14}$/ // 7 a 14 numeros.
 }
+
+const campos = {
+	nombre: false,
+	email: false,
+	telefono: false
+}
+
+function validarFormulario(evento) {
+  switch (evento.target.name) {
+      case "nombre":
+          validarCampo(expresiones.nombre, evento.target, 'nombre');
+          break;
+      case "email":
+          validarCampo(expresiones.email, evento.target, 'email');
+          break;
+      case "telefono":
+          validarCampo(expresiones.telefono, evento.target, 'telefono');
+          break;
+  }
+}
+
+
+function validarCampo(expresion, input, campo) {
+  if (expresion.test(input.value)) {
+      document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-incorrecto');
+      document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-correcto');
+      document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.remove('formulario__input-error-activo');
+      campos[campo] = true;
+  } else {
+      document.getElementById(`grupo__${campo}`).classList.add('formulario__grupo-incorrecto');
+      document.getElementById(`grupo__${campo}`).classList.remove('formulario__grupo-correcto');
+      document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add('formulario__input-error-activo');
+      campos[campo] = false;
+  }
+}
+
+
+inputs.forEach((input) => {
+	input.addEventListener('keyup', validarFormulario);
+	input.addEventListener('blur', validarFormulario);
+});
+
+formulario.addEventListener('submit', (e) => {
+	e.preventDefault();
+
+	
+	if(campos.nombre && campos.email && campos.telefono){
+		formulario.reset();
+
+		document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
+		setTimeout(() => {
+			document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
+		}, 5000);
+
+	} else {
+		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
+	}
+});
