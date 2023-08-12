@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de contacto</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <h1>Contacto</h1>
+    <main>
+      <form class="formulario" id="formulario">
+
+        <!--Grupo: Nombre-->
+        <div class="formulario__grupo" id="grupo__nombre">
+          <label for="nombre" class="formulario__label">Nombre:</label>
+          <div>
+            <input
+              type="text"
+              class="formulario__input"
+              id="nombre"
+              name="nombre"
+            />
+          </div>
+        </div>
+        
+        <!--Grupo: Email-->
+        <div class="formulario__grupo" id="grupo__email">
+          <label for="email" class="formulario__label">Email:</label>
+          <div class="formulario__grupo-input">
+            <input
+              type="text"
+              class="formulario__input"
+              id="email"
+              name="email"
+            />
+          </div>
+        </div>
+
+        <!--Grupo: telefono-->
+        <div class="formulario__grupo" id="grupo__telefono">
+          <label for="telefono" class="formulario__label">Telefono:</label>
+          <div class="formulario__grupo-input">
+            <input
+              type="tel"
+              class="formulario__input"
+              id="telefono"
+              name="telefono"
+            />
+          </div>
+        </div>
+
+        <label for="mensaje" class="formulario__label">Mensaje:</label>
+        <textarea
+          name="mensaje"
+          id="mensaje"
+          cols="30"
+          rows="4"
+          maxlength="200"
+        ></textarea>
+
+        <!--Grupo: Boton-->
+        <div class="formulario__grupo formulario__grupo-btn-enviar">
+          <button type="submit" class="formulario__btn">Enviar</button>
+          <p class="formulario__errores" id="formulario__errores"></p>
+        </div>
+      </form>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
