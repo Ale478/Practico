@@ -1,44 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
-import { PrimerComponente } from './componentes/PrimerComponente';
-import { SegundoComponente } from './componentes/SegundoComponente';
-import BotonContador from './componentes/BotonContador';
-import Saludo from './componentes/Saludo';
-import Saludo2 from './componentes/Saludo2';
-import { useState } from 'react';
+import { useState } from "react";
+import "./App.css";
+import BarChart from "./componentes/BarChart"
+import { Label } from "./Data";
+import LineChart from "./componentes/LineChart";
+import PieChart from "./componentes/PieChart";
+
 
 function App() {
+  const [userData, setUserData] = useState({
+    labels: Label.map((data) => data.year),
+    datasets: [
+      {
+        label: "Users Gained",
+        data: Label.map((data) => data.userGain),
+        backgroundColor: [
+          "rgba(75,192,192,1)",
+          "#ecf0f1",
+          "#50AF95",
+          "purple",
+          "#2a71d0",
+        ],
+        borderColor: "black",
+        borderWidth: 2,
+      },
+    ],
+  });
 
-  const [nombre, setNombre] = useState('');
-
-  const ChangeNameApp = (nuevoNombre) => {
-    setNombre(nuevoNombre);
-  };
   return (
     <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Hola mundo!
-      </p>
-
-      <h1>Ejemplo de Props en React con Input</h1>
-      <Saludo2 nombre={nombre} ChangeName={ChangeNameApp}/>
-
-      
-      <h1>Ejemplo de Props en React</h1>
-      <Saludo nombre="Juan" /> {/* Pasamos "Juan" como prop al componente Saludo */}
-      <Saludo nombre="María" /> {/* Pasamos "María" como prop al componente Saludo */}
-
-      <BotonContador/>
-      <PrimerComponente/>
-      <SegundoComponente/>
-      
-
-    </header>
-  </div>
+      <div style={{ width: 700 }}>
+        <BarChart chartData={userData} />
+      </div>
+      <div style={{ width: 700 }}>
+        <LineChart chartData={userData} />
+      </div>
+      <div style={{ width: 700 }}>
+        <PieChart chartData={userData} />
+      </div>
+    </div>
   );
 }
 
 export default App;
-
