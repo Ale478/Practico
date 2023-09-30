@@ -5,7 +5,6 @@ import { Label } from "./Data";
 import LineChart from "./componentes/LineChart";
 import PieChart from "./componentes/PieChart";
 
-
 function App() {
   const [userData, setUserData] = useState({
     labels: Label.map((data) => data.year),
