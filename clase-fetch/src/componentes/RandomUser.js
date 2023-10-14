@@ -23,8 +23,8 @@ const RandomUser = () => {
   return (
     <div>
       {loading ? (
-        <div class="spinner-border text-primary" role="status">
-          <span class="visually-hidden">Loading...</span>
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
         </div>
       ) : null}
       {user ? (
